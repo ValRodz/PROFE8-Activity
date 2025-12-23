@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "610845866290",
+    "project_id": "activity5-7910b",
+    "storage_bucket": "activity5-7910b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610845866290:android:cbbe06eb97b856beb0ff2b",
+        "android_client_info": {
+          "package_name": "Activity5.profe8"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaDMZmQ14aLqRyWmRwn1y7fJanuB1EUq8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

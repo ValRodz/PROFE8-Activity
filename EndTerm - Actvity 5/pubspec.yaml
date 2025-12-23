@@ -1,0 +1,42 @@
+name: crud_app
+description: A simple Flutter CRUD application with MySQL backend
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  cupertino_icons: ^1.0.6
+  
+  # Networking
+  http: ^1.1.2
+  # Firebase
+  firebase_core: ^3.0.0
+  firebase_auth: ^5.1.0
+  # Image handling
+  image_picker: ^0.8.7+5
+  # State management
+  provider: ^6.0.5
+  # File picker for web fallback
+  file_picker: ^5.3.0
+  
+  # Local Storage for user session
+  shared_preferences: ^2.2.2
+  
+  # Date formatting
+  intl: ^0.18.1
+  
+  # Date and Time Pickers
+  flutter_datetime_picker_plus: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+
+flutter:
+  uses-material-design: true

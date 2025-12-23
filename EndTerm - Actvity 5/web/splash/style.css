@@ -1,0 +1,28 @@
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #667eea;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+#app {
+  width: 100%;
+}
+
+.splash-message {
+  color: #fff;
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
+}
+

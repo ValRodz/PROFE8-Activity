@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--
+  This file provides the shell around which Flutter web builds its app.
+  DO NOT MODIFY. All customization should be done in Flutter widgets.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="description" content="Flutter CRUD App with MySQL">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Flutter CRUD App</title>
+
+    <!-- Progressive Web App tags -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="CRUD App">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="stylesheet" type="text/css" href="splash/style.css">
+    <meta name="theme-color" content="#667eea">
+    <meta name="msapplication-TileColor" content="#667eea">
+</head>
+<body>
+    <!-- The app will be rendered here -->
+    <div id="app"></div>
+
+    <!-- This script installs service_worker.js to provide PWA functionality to
+         application. For more information, see:
+         https://developers.google.com/web/fundamentals/primers/service-workers -->
+    <script>
+        var scriptLoaded = false;
+        function loadMainDartJs() {
+            if (scriptLoaded) {
+                return;
+            }
+            scriptLoaded = true;
+            var scriptTag = document.createElement('script');
+            scriptTag.src = 'main.dart.js';
+            scriptTag.type = 'application/javascript';
+            document.body.append(scriptTag);
+        }
+
+        if ('serviceWorker' in navigator) {
+            // Service workers are supported. Use them.
+            window.addEventListener('load', function () {
+                // Wait for registration to finish before dropping the <script> tag.
+                // Otherwise, the browser consumes the <script> before service_worker.js
+                // has a chance to initialize.
+                var serviceWorkerUrl = 'flutter_service_worker.js?v=' + '{{flutter_service_worker_version}}';
+                navigator.serviceWorker.register(serviceWorkerUrl).then(function (reg) {
+                    function checkVersion() {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', 'version.json?t=' + new Date().getTime());
+                        xhr.onload = function () {
+                            var responseJson = JSON.parse(xhr.response);
+                            var AppVersion = responseJson.app_version;
+                            var CanvasKitVersion = responseJson.canvaskit_version;
+                            var LineEndings = responseJson.line_endings;
+                            var serviceWorkerVersion = '{{flutter_service_worker_version}}';
+                            // Ignore LineEndings for now.
+                            if (AppVersion == serviceWorkerVersion && CanvasKitVersion == serviceWorkerVersion) {
+                                // up to date. nothing to do.
+                                loadMainDartJs();
+                            } else {
+                                // new version available. refresh.
+                                console.log("New app version available");
+                            }
+                        };
+                        xhr.onerror = function () {
+                            console.log("Failed to check app version");
+                        };
+                        xhr.send();
+                    }
+
+                    reg.onupdatefound = () => {
+                        const installingWorker = reg.installing;
+                        installingWorker.onstatechange = () => {
+                            if (installingWorker.state === 'installed') {
+                                loadMainDartJs();
+                            }
+                        };
+                    };
+                    // If service worker didn't fire install event, which sometimes
+                    // happens when the app is first loaded from a progressive web app
+                    // installed into a home screen, then call loadMainDartJs.
+                    if (reg.installing == null) {
+                        loadMainDartJs();
+                    }
+                }).catch(error => {
+                    console.log('Failed to register service worker: ', error);
+                    loadMainDartJs();
+                });
+            });
+        } else {
+            // Service workers not supported. Just start the app.
+            loadMainDartJs();
+        }
+    </script>
+</body>
+</html>
